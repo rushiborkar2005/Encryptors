@@ -29,14 +29,14 @@ const Footer = () => {
         className="text-white py-20 text-center px-4"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to start saving on your utility bills?
+            Secure your finances with confidence.
           </h2>
           <p className="text-lg max-w-2xl mx-auto mb-8">
-            Join thousands of homeowners who are already reducing their environmental impact and saving money with EcoTrack.
+            Join thousands who trust Finesure to simplify money management and protect their financial future.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button className="group bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition cursor-pointer flex items-center gap-2">
-              Start Free Trial
+              Get Started Free
               <span className="transform transition-transform duration-200 group-hover:translate-x-1">
                 <i className="fa fa-angle-right"></i>
               </span>

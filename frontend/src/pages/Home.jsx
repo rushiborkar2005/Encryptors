@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useState } from "react";
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { User, CreditCard, ArrowUpRight } from "lucide-react";
@@ -10,6 +11,7 @@ import MultiColorProgressBar from '../components/UI/MultiColorProgressBar';
 import InvestmentItem from '../components/UI/InvestmentItem';
 import GoalTracker from '../components/UI/GoalTracker';
 import SchemeCard from '../components/UI/SchemeCard';
+import ExpenseModal from '../components/UI/ExpenseModal';
 
 const data = [
   { name: "Essentials", value: 60000, color: "#22c55e" },
@@ -23,6 +25,12 @@ const progressData = [
 ];
 
 const Home = () => {
+const [isModalOpen, setModalOpen] = useState(false);
+const handleSave = (expense) => {
+  console.log("New Expense:", expense);
+  // 👉 Here you can push to backend / state management
+};
+
   return (
     <section className="bg-white py-16 px-6 mt-20">
       <div className="max-w-5xl mx-auto text-center">
@@ -100,12 +108,20 @@ const Home = () => {
             Hi Renuka, here’s your financial health today.
           </h2>
           <div className="flex items-center gap-4">
-            <button className="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">
+            <button onClick={() => setModalOpen(true)} 
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 duration-200 rounded-lg cursor-pointer"
+            >
               Add Expense
             </button>
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg cursor-pointer">
+            <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg cursor-pointer">
               Invest Now
             </button>
+            {/* Modal */}
+            <ExpenseModal
+              isOpen={isModalOpen}
+              onClose={() => setModalOpen(false)}
+              onSave={handleSave}
+            />
           </div>
         </div>
         <div className="p-6">
@@ -411,8 +427,6 @@ const Home = () => {
       </motion.div>
     </div>
     </section>
-
-    
   )
 }
 
