@@ -1,16 +1,60 @@
-<<<<<<< HEAD
-# Encryptors
-=======
-# React + Vite
+# Finesure - Micro Investment Advisor Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Finesure is a **micro investment advisor tool** that helps users start investing in safe, low-risk schemes with as little as a few rupees. The frontend is built with **React + Vite** along with Tailwind CSS and Framer Motion, designed to be clean, responsive, and user-friendly.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 📊 Micro-investment scheme suggestions  
+- 🎯 Goal tracking with progress visualization  
+- 📑 Reusable UI components (Navbar, Footer, Cards, etc.)  
+- 📱 Fully responsive across all screen sizes  
+- 🔗 API integration ready for backend services  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> 2abeede (Initial commit: React project setup)
+## 🧩 Reusable Components
+- **Navbar.jsx** → Navigation bar  
+- **Footer.jsx** → Footer section  
+- **SignIn.jsx** → Sign-in page/component  
+
+---
+
+## 🔗 API Integration
+- Designed to connect with backend APIs (documentation will be updated once backend endpoints are ready).  
+- Handles authentication and investment data retrieval.  
+
+---
+
+## ⚙️ Build & Run Instructions
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+
+2. Install dependencies:
+   ```bash
+   npm install
+
+3. Run the project:
+   ```bash
+   npm run dev
+
+
+# Responsiveness Standards
+
+Mobile-first design
+
+Fully responsive for small (mobile), medium (tablet), and large (desktop) screens
+
+Uses flexbox & grid for layouts
+
+# Roadmap
+
+ Backend API integration
+
+ User authentication flow
+
+ Real-time investment tracking
+
+ Dashboard with personalized insights
