@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { useState } from "react";
+import React, { useEffect, useState, useRef } from 'react';
+import axios from "axios";
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { User, CreditCard, ArrowUpRight } from "lucide-react";
-import axios from "axios"; // ✅ added
-
 import funds from '../assets/funds.png';
 import loan from '../assets/loan.png';
 import bonds from '../assets/bonds.png';
@@ -27,6 +25,7 @@ const progressData = [
 ];
 
 const Home = () => {
+//add expense
 const [isModalOpen, setModalOpen] = useState(false);
 const [user, setUser] = useState(null);
 const handleSave = (expense) => {
@@ -34,19 +33,12 @@ const handleSave = (expense) => {
   // 👉 Here you can push to backend / state management
 };
 
+// dynamic username
 useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
-          withCredentials: true,
-        });
-        setUser(res.data);
-      } catch (err) {
-        console.error("Not logged in:", err);
-      }
-    };
-    fetchUser();
-  }, []);
+  axios.get("http://localhost:5000/api/users/profile", { withCredentials: true })
+    .then(res => setUser(res.data))
+    .catch(() => setUser(null));
+}, []);
 
   return (
     <section className="bg-white py-16 px-6 mt-20">
@@ -122,7 +114,7 @@ useEffect(() => {
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">
-            Hi  {user ? `${user.firstName} ${user.lastName}` : "Guest"}, here’s your financial health today.
+            Hi {user ? user.firstname : "Guest"}, here’s your financial health today.
           </h2>
           <div className="flex items-center gap-4">
             <button onClick={() => setModalOpen(true)} 

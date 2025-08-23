@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-
 // @desc    Register a new user
 // @route   POST /api/users/register
 export const registerUser = async (req, res) => {
@@ -105,6 +104,21 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     console.error("❌ Login error:", error);
     res.status(500).json({ message: "Server error, please try again later" });
+  }
+};
+
+// @desc    Get logged-in user
+// @route   GET /api/users/me
+export const getMe = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: "Not authorized" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select("-password");
+    res.json(user);
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
   }
 };
 
