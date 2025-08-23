@@ -1,6 +1,6 @@
-# Finesure - Micro Investment Advisor Tool
+# Finsure - Micro Investment Advisor Tool
 
-Finesure is a **micro investment advisor tool** that helps users start investing in safe, low-risk schemes with as little as a few rupees. The frontend is built with **React + Vite** along with Tailwind CSS and Framer Motion, designed to be clean, responsive, and user-friendly.
+Finsure is a **micro investment advisor tool** that helps users start investing in safe, low-risk schemes with as little as a few rupees. The frontend is built with **React + Vite** along with Tailwind CSS and Framer Motion, designed to be clean, responsive, and user-friendly.
 
 ---
 
