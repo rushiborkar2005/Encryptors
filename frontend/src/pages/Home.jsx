@@ -3,6 +3,8 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { User, CreditCard, ArrowUpRight } from "lucide-react";
+import axios from "axios"; // ✅ added
+
 import funds from '../assets/funds.png';
 import loan from '../assets/loan.png';
 import bonds from '../assets/bonds.png';
@@ -26,10 +28,25 @@ const progressData = [
 
 const Home = () => {
 const [isModalOpen, setModalOpen] = useState(false);
+const [user, setUser] = useState(null);
 const handleSave = (expense) => {
   console.log("New Expense:", expense);
   // 👉 Here you can push to backend / state management
 };
+
+useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/users/profile", {
+          withCredentials: true,
+        });
+        setUser(res.data);
+      } catch (err) {
+        console.error("Not logged in:", err);
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <section className="bg-white py-16 px-6 mt-20">
@@ -105,7 +122,7 @@ const handleSave = (expense) => {
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">
-            Hi Renuka, here’s your financial health today.
+            Hi  {user ? `${user.firstName} ${user.lastName}` : "Guest"}, here’s your financial health today.
           </h2>
           <div className="flex items-center gap-4">
             <button onClick={() => setModalOpen(true)} 

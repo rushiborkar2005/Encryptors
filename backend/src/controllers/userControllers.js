@@ -56,32 +56,42 @@ export const registerUser = async (req, res) => {
   }
 };
 
+
 // @desc    Login a user
 // @route   POST /api/users/login
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 1️⃣ Validate
+    // Validate
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password are required" });
     }
 
-    // 2️⃣ Find user by email
+    //  Find user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // 3️⃣ Compare password
+    //  Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // 4️⃣ Generate JWT token
+    //  Generate JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 
+    //  Set cookie (secure way)
+    res.cookie("token", token, {
+      httpOnly: true,          // cannot be accessed by JS
+      secure: process.env.NODE_ENV === "production", // true only on HTTPS
+      sameSite: "strict",      // CSRF protection
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    });
+
+    //  Return response (exclude password)
     res.json({
       message: "Login successful",
       user: {
@@ -91,11 +101,21 @@ export const loginUser = async (req, res) => {
         email: user.email,
         phone: user.phone,
       },
-      token,
     });
   } catch (error) {
     console.error("❌ Login error:", error);
     res.status(500).json({ message: "Server error, please try again later" });
   }
+};
+
+// @desc    Logout user
+// @route   POST /api/users/logout
+export const logoutUser = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.json({ message: "Logged out successfully" });
 };
 
